@@ -1,4 +1,5 @@
 from tkinter import *
+import random
 from Punto import Punto
 from Circulo import Circulo
 from Triangulo import Triangulo
@@ -12,10 +13,13 @@ ventana = Tk()
 ventana.title("P r o y e c t o  f i n a l")
 ventana.geometry("1000x1000")
 
-lienzo = Canvas(ventana, width=1000, height=1000, bg="#1F305E")
+lienzo = Canvas(ventana, width=1000, height=1000)
 lienzo.pack()
 
 figuras = [
+
+    Circulo(500,500,2000,"#1F305E"),
+
     # Luna
     Luna(500, 500, 200, "#C9B9B9"),
 
@@ -48,12 +52,39 @@ figuras = [
     Hexagono(651,966, 5, "#BDB76B"),
     Hexagono(126,936, 5, "#F0E68C"),
     Hexagono(485,798, 5, "#FAFAD2"),
-    Hexagono(437,91, 5, "#FFFACD"),
-
-    NaveEspacial(200, 200, 1)
+    Hexagono(437,91, 5, "#FFFACD")
 ]
+
+nave = NaveEspacial(200, 200, 1)
+figuras.append(nave)
 
 for f in figuras:
     f.dibuja(lienzo)
 
+
+def moverNave():
+    dx = random.choice([-10,-9,-8,-7,-6,-5,-4,-3, -2, -1, 1, 2, 3,4,5,6,7,8,9,10])
+    dy = random.choice([-10,-9,-8,-7,-6,-5,-4,-3, -2, -1, 1, 2, 3,4,5,6,7,8,9,10])
+
+    coords = nave.obtenerCoordenadas()
+    if len(coords) >= 2:
+        x, y = coords[0], coords[1]
+
+        # Verificar colisión con los bordes y cambiar dirección si es necesario
+        if x + dx <= 0 or x + dx >= 1000:
+            dx *= -1
+        if y + dy <= 0 or y + dy >= 1000:
+            dy *= -1
+
+        nave.setX(x + dx)
+        nave.setY(y + dy)
+
+        for f in figuras:
+            f.dibuja(lienzo)
+
+
+    ventana.after(50, moverNave)  # Llamar nuevamente en 50ms
+
+
+moverNave()  # Iniciar el movimiento
 ventana.mainloop()

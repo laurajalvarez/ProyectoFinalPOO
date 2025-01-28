@@ -21,9 +21,9 @@ class NaveEspacial:
         anchoAntena = 9 * self.escala
 
         # Sombra
-        sombraDomo = Circulo(self.x, self.y - 3 * self.escala, radioDomo + 10 , "#FFFFFF" )
+        sombraDomo = Circulo(self.x, self.y - 3 * self.escala, radioDomo + 10 * self.escala , "#FFFFFF" )
         sombraDomo.dibuja(lienzo)
-        sombraBase = Ovalo(self.x, self.y + 20 * self.escala, ancho + 15 , alto + 15 , "#FFFFFF")
+        sombraBase = Ovalo(self.x, self.y + 20 * self.escala, ancho + 15 * self.escala, alto + 15 * self.escala , "#FFFFFF")
         sombraBase.dibuja(lienzo)
 
         # Domo
@@ -39,7 +39,7 @@ class NaveEspacial:
         base.dibuja(lienzo)
 
         # Sombra inferior
-        sombra = Ovalo(self.x, self.y + 30 * self.escala, ancho - 20, alto - 10, self.colorSombra)
+        sombra = Ovalo(self.x, self.y + 30 * self.escala, ancho - 20 * self.escala, alto - 10 * self.escala, self.colorSombra)
         sombra.dibuja(lienzo)
 
         # Antena
@@ -53,6 +53,15 @@ class NaveEspacial:
         for dx in posiciones_luces:
             luz = Circulo(self.x + dx * self.escala, self.y + 15 * self.escala, radioLuz, self.colorLuces)
             luz.dibuja(lienzo)
+
+    def setX(self, x):
+        self.x = x
+
+    def setY(self, y):
+        self.y = y
+
+    def obtenerCoordenadas(self):
+        return (self.x, self.y)
 
     def __str__(self):
         return
