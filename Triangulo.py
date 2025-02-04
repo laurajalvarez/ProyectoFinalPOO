@@ -36,7 +36,7 @@ class Triangulo(Punto):
         if self.__invertir:
             # Triángulo invertido
             lienzo.create_polygon(
-                self.getX(), self.getY() + self.__alto // 2,  # Vértice inferior (pico inferior)
+                self.getX(), self.getY() + self.__alto // 2,  # Vértice inferior
                 self.getX() - self.__ancho // 2, self.getY() - self.__alto // 4,  # Vértice superior izquierdo
                 self.getX() + self.__ancho // 2, self.getY() - self.__alto // 4,  # Vértice superior derecho
                 outline=self.color, fill=self.color
@@ -44,7 +44,7 @@ class Triangulo(Punto):
         else:
             # Triángulo normal
             lienzo.create_polygon(
-                self.getX(), self.getY() - self.__alto // 2,  # Vértice superior (pico superior)
+                self.getX(), self.getY() - self.__alto // 2,  # Vértice superior
                 self.getX() - self.__ancho // 2, self.getY() + self.__alto // 4,  # Vértice inferior izquierdo
                 self.getX() + self.__ancho // 2, self.getY() + self.__alto // 4,  # Vértice inferior derecho
                 outline=self.color, fill=self.color
